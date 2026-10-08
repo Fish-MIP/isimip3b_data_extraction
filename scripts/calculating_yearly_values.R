@@ -29,6 +29,7 @@ input_dir <- "/g/data/vf71/fishmip_inputs/ISIMIP3b/global"
 input_files <- list.files(input_dir, 
                           "thetao_|phydiat_|phydiaz_|phypico_|zmeso_|zmicro_", 
                           recursive = TRUE, full.names = TRUE) |> 
+  str_subset("download_data", negate = T) |> 
   str_subset("60arcmin")
 
 
