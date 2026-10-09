@@ -22,7 +22,11 @@ tidy_nc <- function(file_path, folder_out){
   base_fn <- basename(file_path)
   
   # Get variable name of interest
-  varname <- str_extract(base_fn, "ssp\\d{3}_(.*)_60a", group = 1)
+  if(str_detect(base_fn, "ssp")){
+    varname <- str_extract(base_fn, "ssp\\d{3}_(.*)_60a", group = 1)
+  }else if(str_detect(base_fn, "hist")){
+    varname <- str_extract(base_fn, "historical_(.*)_60a", group = 1)
+  }
   start_year <- str_extract(base_fn, "-year_(\\d{4})_", group = 1)
   end_year <- str_extract(base_fn, "_(\\d{4}).nc", group = 1)
   

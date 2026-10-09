@@ -26,18 +26,18 @@ if(!dir.exists(path_out)){
 # Location of data to be processed
 input_dir <- "/g/data/vf71/fishmip_inputs/ISIMIP3b/global"
 
-input_files <- list.files(input_dir, 
-                          "thetao_|phydiat_|phydiaz_|phypico_|zmeso_|zmicro_", 
-                          recursive = TRUE, full.names = TRUE) |> 
-  str_subset("download_data", negate = T) |> 
+input_files <- list.files(input_dir,
+                          "thetao_|phydiat_|phydiaz_|phypico_|zmeso_|zmicro_",
+                          recursive = TRUE, full.names = TRUE) |>
+  str_subset("download_data", negate = T) |>
   str_subset("60arcmin")
 
 
 # Calculating global yearly means -----------------------------------------
-input_files |> 
-  lapply(function(x) 
+input_files |>
+  lapply(function(x)
     cdo_yearmean(x, ofile = file.path(
-      path_out, str_replace(basename(x), "_monthly_", "_mean-year_"))) |> 
+      path_out, str_replace(basename(x), "_monthly_", "_mean-year_"))) |>
       cdo_execute())
 
 
